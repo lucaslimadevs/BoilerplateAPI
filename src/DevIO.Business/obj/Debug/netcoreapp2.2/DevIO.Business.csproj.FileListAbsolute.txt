@@ -1,0 +1,10 @@
+C:\Git_lucaslimadevs\BoilerplateAPI\src\DevIO.Business\bin\Debug\netcoreapp2.2\DevIO.Business.deps.json
+C:\Git_lucaslimadevs\BoilerplateAPI\src\DevIO.Business\bin\Debug\netcoreapp2.2\DevIO.Business.dll
+C:\Git_lucaslimadevs\BoilerplateAPI\src\DevIO.Business\bin\Debug\netcoreapp2.2\DevIO.Business.pdb
+C:\Git_lucaslimadevs\BoilerplateAPI\src\DevIO.Business\obj\Debug\netcoreapp2.2\DevIO.Business.csproj.AssemblyReference.cache
+C:\Git_lucaslimadevs\BoilerplateAPI\src\DevIO.Business\obj\Debug\netcoreapp2.2\DevIO.Business.GeneratedMSBuildEditorConfig.editorconfig
+C:\Git_lucaslimadevs\BoilerplateAPI\src\DevIO.Business\obj\Debug\netcoreapp2.2\DevIO.Business.AssemblyInfoInputs.cache
+C:\Git_lucaslimadevs\BoilerplateAPI\src\DevIO.Business\obj\Debug\netcoreapp2.2\DevIO.Business.AssemblyInfo.cs
+C:\Git_lucaslimadevs\BoilerplateAPI\src\DevIO.Business\obj\Debug\netcoreapp2.2\DevIO.Business.csproj.CoreCompileInputs.cache
+C:\Git_lucaslimadevs\BoilerplateAPI\src\DevIO.Business\obj\Debug\netcoreapp2.2\DevIO.Business.dll
+C:\Git_lucaslimadevs\BoilerplateAPI\src\DevIO.Business\obj\Debug\netcoreapp2.2\DevIO.Business.pdb
