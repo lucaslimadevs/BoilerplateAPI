@@ -11,7 +11,7 @@ namespace DevIO.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class FornecedoresController : MainController
+    public class FornecedoresController: MainController
     {
         private readonly IFornecedorRepository _fornecedorRepository;
         private readonly IFornecedorService _fornecedorService;
