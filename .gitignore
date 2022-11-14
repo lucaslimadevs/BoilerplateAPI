@@ -21,6 +21,8 @@ bld/
 [Bb]in/
 [Oo]bj/
 
+volumes/
+
 # Roslyn cache directories
 *.ide/
 
@@ -176,6 +178,8 @@ UpgradeLog*.htm
 # SQL Server files
 *.mdf
 *.ldf
+
+
 
 # Business Intelligence projects
 *.rdl.data
