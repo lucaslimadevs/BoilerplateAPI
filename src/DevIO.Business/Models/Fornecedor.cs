@@ -12,6 +12,6 @@ namespace DevIO.Business.Models
         public bool Ativo { get; set; }
 
         /* EF Relations */
-        public IEnumerable<Produto> Produtos { get; set; }
+        public virtual IEnumerable<Produto> Produtos { get; set; }
     }
 }

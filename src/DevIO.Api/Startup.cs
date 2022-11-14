@@ -35,7 +35,10 @@ namespace DevIO.Api
 
             services.AddAutoMapper(typeof(AutoMapperProfileConfig));
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
 
             services.ResolveDependecies();
         }
