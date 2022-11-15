@@ -19,7 +19,8 @@ namespace DevIO.Api.Configuration
 
             services.AddScoped<INotificador, Notificador>();
             services.AddScoped<IFornecedorService, FornecedorService>();
-            services.AddScoped<IProdutoService, ProdutoService>();            
+            services.AddScoped<IProdutoService, ProdutoService>();
+            services.AddScoped<IEnderecoService, EnderecoService>();
 
             return services;
         }
