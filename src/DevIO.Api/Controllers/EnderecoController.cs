@@ -29,10 +29,7 @@ namespace DevIO.Api.Controllers
 
         [HttpGet]
         public async Task<IEnumerable<EnderecoViewModel>> ObterTodos()
-        {
-            var enderecoViewModels = _mapper.Map<IEnumerable<EnderecoViewModel>>(await _enderecoRepository.ObterTodos());
-            return enderecoViewModels;
-        }
+            => _mapper.Map<IEnumerable<EnderecoViewModel>>(await _enderecoRepository.ObterTodos());
 
         [HttpPut("{id}")]
         public async Task<ActionResult<EnderecoViewModel>> Atualizar(Guid id, [FromBody] EnderecoViewModel enderecoViewModel)
