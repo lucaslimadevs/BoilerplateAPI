@@ -179,7 +179,7 @@ UpgradeLog*.htm
 *.mdf
 *.ldf
 
-
+volumes/data2/
 
 # Business Intelligence projects
 *.rdl.data
