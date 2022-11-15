@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 using System.IO;
 
 namespace DevIO.Api
@@ -41,6 +42,11 @@ namespace DevIO.Api
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
 
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "BoilerPlateAPI", Version = "v1" });
+            });
+
             services.Configure<ApiBehaviorOptions>(options => 
             {
                 options.SuppressModelStateInvalidFilter = true;
@@ -55,6 +61,8 @@ namespace DevIO.Api
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseSwagger();
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MinhaAPICore v1"));
             }
             else
             {
