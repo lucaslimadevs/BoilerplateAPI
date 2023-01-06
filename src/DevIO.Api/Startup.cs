@@ -32,8 +32,10 @@ namespace DevIO.Api
 
             services.AddDbContext<MeuDbContext>(options => 
             {
-                options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
+
+            services.AddIdentityConfiguration(Configuration);
 
             services.AddAutoMapper(typeof(AutoMapperProfileConfig));
 
@@ -89,6 +91,8 @@ namespace DevIO.Api
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {

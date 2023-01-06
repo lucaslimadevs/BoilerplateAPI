@@ -1,4 +1,5 @@
-﻿using DevIO.Business.Intefaces;
+﻿using DevIO.Api.Data;
+using DevIO.Business.Intefaces;
 using DevIO.Business.Notificacoes;
 using DevIO.Business.Services;
 using DevIO.Data.Context;
@@ -12,6 +13,7 @@ namespace DevIO.Api.Configuration
         public static IServiceCollection ResolveDependecies(this IServiceCollection services)
         {
             services.AddScoped<MeuDbContext>();
+            services.AddScoped<AplicationDbContext>();
             services.AddScoped<IFornecedorRepository, FornecedorRepository>();
             services.AddScoped<IProdutoRepository, ProdutoRepository>();
             services.AddScoped<IEnderecoRepository, EnderecoRepository>();
