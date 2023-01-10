@@ -1,0 +1,57 @@
+﻿using DevIO.Api.Configuration;
+using DevIO.Api.ViewModels;
+using DevIO.Business.Intefaces;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Win32;
+using System;
+using System.Threading.Tasks;
+
+namespace DevIO.Api.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class AuthController : MainController
+    {
+        public readonly IidentityManager _identityManager;
+        public AuthController(INotificador notificador, IidentityManager identityManager) : base(notificador)
+        {
+            _identityManager = identityManager;
+        }
+
+        [HttpPost("registrar-usuario")]
+        public async Task<ActionResult> Registrar([FromBody] UserRegisterViewModel UserRegister)
+        {
+            if(!ModelState.IsValid) return BadRequest(ModelState);
+
+            var result = await _identityManager.RegisterUser(UserRegister);
+
+            if (result is null)
+            {
+                return CustomResponse(UserRegister);
+            }
+
+            foreach (var error in result)
+            {
+                NotificarErro(error);
+            }
+            
+            return CustomResponse(result);
+        }
+
+        [HttpPost("login")]
+        public async Task<ActionResult> Login([FromBody] UserLoginViewModel UserLogin)
+        {
+            if (!ModelState.IsValid) return BadRequest(ModelState);
+
+            var logged = await _identityManager.Login(UserLogin);
+
+            if (logged)
+            {
+                return CustomResponse(UserLogin);
+            }
+
+            NotificarErro("Incorrect username or password");
+            return CustomResponse(UserLogin);
+        }
+    }
+}

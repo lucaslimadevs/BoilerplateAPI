@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "DevIO.Data": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      },
+      "applicationUrl": "https://localhost:50129;http://localhost:50131"
+    }
+  }
+}
