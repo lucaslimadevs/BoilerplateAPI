@@ -16,7 +16,7 @@ Already posing in your configuration:
 
 
 
-![alt text](https://github.com/lucaslimadevs/BoilerplateAPI/blob/main/boilerplateApi.png?raw=true)
+![image](https://user-images.githubusercontent.com/117870158/211464317-c2d4ded5-3a5c-4e16-a722-99f2eba76926.png)
 
 ## To run API
 
