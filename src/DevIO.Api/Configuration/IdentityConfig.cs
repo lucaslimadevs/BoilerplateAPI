@@ -1,4 +1,5 @@
 ﻿using DevIO.Api.Data;
+using DevIO.Api.Extensions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -18,6 +19,7 @@ namespace DevIO.Api.Configuration
                 .AddDefaultIdentity<IdentityUser>()
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<AplicationDbContext>()
+                .AddErrorDescriber<IdentityMesageToPortuguese>()
                 .AddDefaultTokenProviders();
 
             return services;
