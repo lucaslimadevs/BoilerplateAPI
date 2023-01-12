@@ -4,6 +4,8 @@ using DevIO.Business.Intefaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Win32;
 using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace DevIO.Api.Controllers
@@ -27,7 +29,7 @@ namespace DevIO.Api.Controllers
 
             if (result is null)
             {
-                return CustomResponse(UserRegister);
+                return CustomResponse(_identityManager.GenerateJwt());
             }
 
             foreach (var error in result)
@@ -47,7 +49,7 @@ namespace DevIO.Api.Controllers
 
             if (logged)
             {
-                return CustomResponse(UserLogin);
+                return CustomResponse(_identityManager.GenerateJwt());
             }
 
             NotificarErro("Incorrect username or password");
