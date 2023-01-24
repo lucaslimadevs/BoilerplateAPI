@@ -9,7 +9,7 @@ namespace DevIO.Data.Context
     {
         public MeuDbContext CreateDbContext(string[] args)
         {                  
-            var optionsBuilder = new DbContextOptionsBuilder();
+            var optionsBuilder = new DbContextOptionsBuilder<MeuDbContext>();
 
             IConfigurationRoot configuration = new ConfigurationBuilder()
                .SetBasePath(Directory.GetCurrentDirectory())

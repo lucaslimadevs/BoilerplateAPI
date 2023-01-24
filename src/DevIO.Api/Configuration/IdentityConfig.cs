@@ -39,7 +39,7 @@ namespace DevIO.Api.Configuration
                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(x => 
             { 
-                x.RequireHttpsMetadata = false;
+                x.RequireHttpsMetadata = true;
                 x.SaveToken = true;
                 x.TokenValidationParameters = new TokenValidationParameters
                 {
@@ -48,7 +48,7 @@ namespace DevIO.Api.Configuration
                     ValidateIssuer = true,
                     ValidateAudience = true,
                     ValidAudience = appSettings.ValidOn,
-                    ValidIssuer= appSettings.Issuer
+                    ValidIssuer  = appSettings.Issuer
                 };
             });
 
