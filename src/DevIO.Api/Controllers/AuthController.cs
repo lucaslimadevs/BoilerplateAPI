@@ -52,7 +52,7 @@ namespace DevIO.Api.Controllers
                 return CustomResponse(await _identityManager.GenerateJwt(UserLogin.Email));
             }
 
-            NotificarErro("Incorrect username or password");
+            NotificarErro("Usuario ou senha incorreta");
             return CustomResponse(UserLogin);
         }
     }
