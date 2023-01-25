@@ -82,9 +82,9 @@ namespace DevIO.Api.Controllers
             return CustomResponse(produtoViewModel);
         }
 
-        [RequestSizeLimit(40000000)]
+        [RequestSizeLimit(40000000)] //exemplo para limitar tamanho de arquivo
         [HttpPost("Imagem")]
-        public async Task<ActionResult<ProdutoViewModel>> AdicionarImagem(IFormFile file)
+        public ActionResult<ProdutoViewModel> AdicionarImagem(IFormFile file)
         {
             return Ok(file);
         }
