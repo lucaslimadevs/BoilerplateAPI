@@ -29,7 +29,7 @@ namespace DevIO.Api.Controllers
 
             if (result is null)
             {
-                return CustomResponse(_identityManager.GenerateJwt());
+                return CustomResponse(await _identityManager.GenerateJwt(UserRegister.Email));
             }
 
             foreach (var error in result)
@@ -49,7 +49,7 @@ namespace DevIO.Api.Controllers
 
             if (logged)
             {
-                return CustomResponse(_identityManager.GenerateJwt());
+                return CustomResponse(await _identityManager.GenerateJwt(UserLogin.Email));
             }
 
             NotificarErro("Incorrect username or password");
