@@ -1,0 +1,192 @@
+{
+	"info": {
+		"_postman_id": "5c6e433d-af27-4215-a88a-743a19112506",
+		"name": "BoilerplateAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "17831873"
+	},
+	"item": [
+		{
+			"name": "registrar usuario",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"useaar2@example.com\",\r\n  \"password\": \"Lu123456@$\",\r\n  \"confirmPassword\": \"Lu123456@$\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5001/api/Auth/registrar-usuario",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"Auth",
+						"registrar-usuario"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"user@example.com\",\r\n  \"password\": \"Lu123456@\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5001/api/Auth/login",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"Auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "recuperar Fornecedores",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE2NzQ2MDcwNTgsImV4cCI6MTY3NDYxMDY1OCwiaWF0IjoxNjc0NjA3MDU4LCJpc3MiOiJCb2lsZXJwbGF0ZUFwaSIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0In0.RJa_qe18_Jt36jwIXqRsg6jdIVRiMg_wvMH75O3_ghY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5001/api/Fornecedores",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"api",
+						"Fornecedores"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "salvar fornecedor",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYmYiOjE2NzQ2MDcwNTgsImV4cCI6MTY3NDYxMDY1OCwiaWF0IjoxNjc0NjA3MDU4LCJpc3MiOiJCb2lsZXJwbGF0ZUFwaSIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0In0.RJa_qe18_Jt36jwIXqRsg6jdIVRiMg_wvMH75O3_ghY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"ed453969-9cb5-42d1-902c-e1900b2134e8\",\r\n    \"nome\": \"Livraria teste 5\",\r\n    \"documento\": \"18862139098\",\r\n    \"tipoFornecedor\": 2,\r\n    \"endereco\": {\r\n        \"id\": \"00000000-0000-0000-0000-000000000000\",\r\n        \"logradouro\": \"Rua teste 5\",\r\n        \"numero\": \"123\",\r\n        \"complemento\": \"Casa\",\r\n        \"cep\": \"56328765\",\r\n        \"bairro\": \"teste\",\r\n        \"cidade\": \"Petrolina\",\r\n        \"estado\": \"PE\"\r\n    },\r\n    \"ativo\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/fornecedores/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"fornecedores",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "editar fornecedor",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJGb3JuZWNlZG9yIjoiQXR1YWxpemFyLEV4Y2x1aXIiLCJzdWIiOiIzMzY1N2I3NS0xMGM1LTQ4MjgtODA2Yy0zMTc4OTRmNDQyOTEiLCJlbWFpbCI6InVzZXJAZXhhbXBsZS5jb20iLCJqdGkiOiIyNWFlN2M3Mi0xYzJmLTRmZDctOGFlMy1hYzRjYmYyOWI1NjciLCJuYmYiOjE2NzQ2MDk4MzMsImlhdCI6MTY3NDYwOTgzMywiZXhwIjoxNjc0NjEzNDMzLCJpc3MiOiJCb2lsZXJwbGF0ZUFwaSIsImF1ZCI6Imh0dHBzOi8vbG9jYWxob3N0In0.cbXbVcdKVZu31maGCZuYTmpJ11sMCSQMMlrcaJfAs9g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"ed453969-9cb5-42d1-902c-e1900b2134e8\",\r\n    \"nome\": \"Livraria teste 5 alterada\",\r\n    \"documento\": \"18862139098\",\r\n    \"tipoFornecedor\": 1,\r\n    \r\n    \"ativo\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/api/fornecedores/ed453969-9cb5-42d1-902c-e1900b2134e8",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"api",
+						"fornecedores",
+						"ed453969-9cb5-42d1-902c-e1900b2134e8"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
