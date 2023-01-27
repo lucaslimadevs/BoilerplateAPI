@@ -1,5 +1,5 @@
 
-# Boilerplait API
+# Boilerplat API
 
 The BolerplaitAPI serves as a basis for those who want to implement an API.
 
