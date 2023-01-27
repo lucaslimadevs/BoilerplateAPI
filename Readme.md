@@ -8,7 +8,7 @@ This project is currently in development using Angular 7, ASP.NET CORE 5 and SQL
 | :placard: showcase.Dev |     |
 | -------------  | --- |
 | :sparkles: Nome        | **BoilerplateAPI**
-| :label: Front-End | Angular 7, Typescript, Bootstrap, CSS
+| :label: Front-End | Angular 7, TypeScript, Bootstrap, CSS
 | :label: Back-End | ASP.NET Core 5, C#, SQL Server
 | :rocket: API         | https://localhost:5001 **follow instructions bellow**
 | :rocket: Front-End         | http://localhost:4200 **follow instructions bellow**
