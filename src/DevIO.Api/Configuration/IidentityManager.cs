@@ -11,6 +11,6 @@ namespace DevIO.Api.Configuration
     {
         Task<IEnumerable<string>> RegisterUser(UserRegisterViewModel userRegister);
         Task<bool> Login(UserLoginViewModel UserLogin);
-        Task<string> GenerateJwt(string email);
+        Task<LoginResponseViewModel> GenerateJwt(string email);
     }
 }
