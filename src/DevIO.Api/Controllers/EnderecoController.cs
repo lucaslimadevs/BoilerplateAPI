@@ -13,16 +13,18 @@ namespace DevIO.Api.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class EnderecoController: MainController
+    public class EnderecoController : MainController
     {
         private readonly IEnderecoService _enderecoService;
-        private readonly IEnderecoRepository _enderecoRepository;        
+        private readonly IEnderecoRepository _enderecoRepository;
         private readonly IMapper _mapper;
         public EnderecoController(
             IEnderecoService enderecoService,
             IEnderecoRepository enderecoRepository,
             IMapper mapper,
-            INotificador notificador) : base(notificador)
+            INotificador notificador,
+            IUser user) : base(notificador, user)
+
         {
             _enderecoRepository = enderecoRepository;
             _mapper = mapper;

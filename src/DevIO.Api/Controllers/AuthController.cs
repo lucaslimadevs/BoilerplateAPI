@@ -11,7 +11,10 @@ namespace DevIO.Api.Controllers
     public class AuthController : MainController
     {
         public readonly IidentityManager _identityManager;
-        public AuthController(INotificador notificador, IidentityManager identityManager) : base(notificador)
+        public AuthController(INotificador notificador,
+                              IUser user,
+                              IidentityManager identityManager
+                              ) : base(notificador, user)
         {
             _identityManager = identityManager;
         }
@@ -19,7 +22,7 @@ namespace DevIO.Api.Controllers
         [HttpPost("registrar-usuario")]
         public async Task<ActionResult> Registrar([FromBody] UserRegisterViewModel UserRegister)
         {
-            if(!ModelState.IsValid) return BadRequest(ModelState);
+            if (!ModelState.IsValid) return BadRequest(ModelState);
 
             var result = await _identityManager.RegisterUser(UserRegister);
 
@@ -32,7 +35,7 @@ namespace DevIO.Api.Controllers
             {
                 NotificarErro(error);
             }
-            
+
             return CustomResponse(result);
         }
 

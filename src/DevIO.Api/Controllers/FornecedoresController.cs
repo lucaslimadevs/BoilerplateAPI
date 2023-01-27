@@ -14,7 +14,7 @@ namespace DevIO.Api.Controllers
     [Authorize]
     [Route("api/[controller]")]
     [ApiController]
-    public class FornecedoresController: MainController
+    public class FornecedoresController : MainController
     {
         private readonly IFornecedorRepository _fornecedorRepository;
         private readonly IFornecedorService _fornecedorService;
@@ -22,7 +22,8 @@ namespace DevIO.Api.Controllers
         public FornecedoresController(IFornecedorRepository fornecedorRepository,
                                       IMapper mapper,
                                       IFornecedorService fornecedorService,
-                                      INotificador notificador): base(notificador)
+                                      INotificador notificador,
+                                      IUser user) : base(notificador, user)
         {
             _fornecedorRepository = fornecedorRepository;
             _mapper = mapper;
@@ -46,12 +47,12 @@ namespace DevIO.Api.Controllers
             return fornecedor;
         }
 
-        [ClaimsAuthorize("Fornecedor","Adicionar")]
+        [ClaimsAuthorize("Fornecedor", "Adicionar")]
         [HttpPost]
         public async Task<ActionResult<FornecedorViewModel>> Adicionar(FornecedorViewModel fornecedorViewModel)
         {
             if (!ModelState.IsValid) CustomResponse(ModelState);
-            
+
             await _fornecedorService.Adicionar(_mapper.Map<Fornecedor>(fornecedorViewModel));
 
             return CustomResponse(fornecedorViewModel);
@@ -61,14 +62,14 @@ namespace DevIO.Api.Controllers
         [HttpPut("{id}")]
         public async Task<ActionResult<FornecedorViewModel>> Atualizar(Guid id, [FromBody] FornecedorViewModel fornecedorViewModel)
         {
-            if (id != fornecedorViewModel.Id) 
+            if (id != fornecedorViewModel.Id)
             {
                 NotificarErro("O Id informado não é o mesmo que foi passado no objeto");
                 return CustomResponse(fornecedorViewModel);
             }
 
             if (!ModelState.IsValid) CustomResponse(ModelState);
-            
+
             await _fornecedorService.Atualizar(_mapper.Map<Fornecedor>(fornecedorViewModel));
 
             return CustomResponse(fornecedorViewModel);

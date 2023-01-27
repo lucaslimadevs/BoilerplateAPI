@@ -23,8 +23,9 @@ namespace DevIO.Api.Controllers
 
         public ProdutosController(INotificador notificador,
                                   IProdutoService produtoService,
-                                  IProdutoRepository produtoRepository, 
-                                  IMapper mapper) : base(notificador)
+                                  IProdutoRepository produtoRepository,
+                                  IMapper mapper,
+                                  IUser user) : base(notificador, user)
         {
             _produtoService = produtoService;
             _produtoRepository = produtoRepository;
@@ -33,7 +34,7 @@ namespace DevIO.Api.Controllers
 
         [HttpGet]
         public async Task<IEnumerable<ProdutoViewModel>> ObterTodos()
-            =>  _mapper.Map<IEnumerable<ProdutoViewModel>>(await _produtoRepository.ObterProdutosFornecedores());
+            => _mapper.Map<IEnumerable<ProdutoViewModel>>(await _produtoRepository.ObterProdutosFornecedores());
 
 
         [HttpGet("{id}")]
@@ -72,7 +73,7 @@ namespace DevIO.Api.Controllers
 
             var imagemPrefix = Guid.NewGuid() + "_";
 
-            if (! await UploadArquivoAlternativo(produtoViewModel.ImagemUpload, imagemPrefix))
+            if (!await UploadArquivoAlternativo(produtoViewModel.ImagemUpload, imagemPrefix))
             {
                 return CustomResponse(ModelState);
             }
@@ -121,9 +122,9 @@ namespace DevIO.Api.Controllers
 
 
         private bool UploadArquivo(string arquivo, string imgNome)
-        {            
+        {
             if (string.IsNullOrEmpty(arquivo))
-            {                
+            {
                 NotificarErro("Forneça uma imagem para este produto!");
                 return false;
             }
@@ -150,7 +151,7 @@ namespace DevIO.Api.Controllers
                 NotificarErro("Forneça uma imagem para este produto!");
                 return false;
             }
-            
+
             var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/app/demo-webapi/src/assets", imgPrefix + arquivo.FileName);
 
             if (System.IO.File.Exists(filePath))
