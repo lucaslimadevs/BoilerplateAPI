@@ -2,10 +2,6 @@
 using DevIO.Api.ViewModels;
 using DevIO.Business.Intefaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Win32;
-using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DevIO.Api.Controllers
