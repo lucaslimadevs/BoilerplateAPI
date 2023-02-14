@@ -77,12 +77,16 @@ namespace DevIO.Api
             else
             {
                 app.UseExceptionHandler("/Home/Error");                                
-                app.UseHsts();
+                app.UseHsts();                
+            }
+
+            if (env.IsProduction())
+            {
+                app.UseHttpsRedirection();
             }
 
             app.UseCors("Development");
 
-            app.UseHttpsRedirection();
             app.UseStaticFiles();
 
             app.UseRouting();
