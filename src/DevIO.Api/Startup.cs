@@ -61,6 +61,15 @@ namespace DevIO.Api
 
                     .AllowCredentials()
                     .SetIsOriginAllowed(hostName => true));
+
+
+                options.AddPolicy("Production",
+                    builder => builder
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .WithOrigins("http://localhost:4200")
+                    .AllowCredentials()
+                    .SetIsOriginAllowed(hostName => true));
             });
 
             services.ResolveDependecies();
@@ -70,6 +79,7 @@ namespace DevIO.Api
         {
             if (env.IsDevelopment())
             {
+                app.UseCors("Development");
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MinhaAPICore v1"));
@@ -82,10 +92,9 @@ namespace DevIO.Api
 
             if (env.IsProduction())
             {
+                app.UseCors("Production");
                 app.UseHttpsRedirection();
-            }
-
-            app.UseCors("Development");
+            }            
 
             app.UseStaticFiles();
 
