@@ -20,6 +20,7 @@ Already posing in your configuration:
 - AutoMapper
 - Swagger Documentation
 - Identity
+- ApiVersioning
 
 ## Author
 
