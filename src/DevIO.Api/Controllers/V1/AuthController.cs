@@ -4,9 +4,10 @@ using DevIO.Business.Intefaces;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
-namespace DevIO.Api.Controllers
+namespace DevIO.Api.Controllers.V1
 {
-    [Route("api/[controller]")]
+    [ApiVersion("1.0")]    
+    [Route("api/v{version:apiVersion}/[controller]")]
     [ApiController]
     public class AuthController : MainController
     {
