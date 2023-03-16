@@ -4,11 +4,11 @@ using DevIO.Data.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.OpenApi.Models;
 using System.IO;
 
 namespace DevIO.Api
@@ -42,11 +42,8 @@ namespace DevIO.Api
                 .AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
-            
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "BoilerPlateAPI", Version = "v1" });
-            });
+
+            services.AddSwaggerConfig();
 
             services.AddApiVersioning(options => 
             {
@@ -88,14 +85,12 @@ namespace DevIO.Api
             services.ResolveDependecies();
         }
        
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IApiVersionDescriptionProvider provider)
         {
             if (env.IsDevelopment())
             {
                 app.UseCors("Development");
-                app.UseDeveloperExceptionPage();
-                app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "MinhaAPICore v1"));
+                app.UseDeveloperExceptionPage();                
             }
             else
             {
@@ -116,6 +111,8 @@ namespace DevIO.Api
             app.UseAuthentication();
             
             app.UseAuthorization();
+
+            app.UseSwaggerConfig(provider);
 
             app.UseEndpoints(endpoints =>
             {
