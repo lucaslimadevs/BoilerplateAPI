@@ -6,6 +6,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace DevIO.Api.Configuration
@@ -16,7 +17,35 @@ namespace DevIO.Api.Configuration
         {
             services.AddSwaggerGen(c =>
             {
-                c.OperationFilter<SwaggerDefaultValues>();
+                c.OperationFilter<SwaggerDefaultValues>();                
+
+                c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+                {
+                    Description = "Insira o token JWT desta maneira: Bearer {seu token}",
+                    Name = "Authorization",
+                    In = ParameterLocation.Header,
+                    Type = SecuritySchemeType.ApiKey,
+                    Scheme = "Bearer"
+                });
+
+                c.AddSecurityRequirement(new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            },
+                            Scheme = "oauth2",
+                            Name = "Bearer",
+                            In = ParameterLocation.Header,
+
+                        },
+                        new List<string>()
+                    }
+                });
             });
 
             return services;
@@ -60,7 +89,7 @@ namespace DevIO.Api.Configuration
                 Description = "Desenvolvida por Lucas Lima - @lucaslimadevs - https://github.com/lucaslimadevs",
                 Contact = new OpenApiContact { Name = "Lucas Lima", Email = "lucaslima.devs@gmail.com" },
                 TermsOfService = new Uri("https://opensource.org/license/mit/"),
-                License = new OpenApiLicense { Name ="MIT", Url = new Uri("https://opensource.org/license/mit/") }
+                License = new OpenApiLicense { Name = "MIT", Url = new Uri("https://opensource.org/license/mit/") }
             };
 
             if (description.IsDeprecated)
@@ -81,7 +110,7 @@ namespace DevIO.Api.Configuration
             operation.Deprecated = apiDescription.IsDeprecated();
 
             if (operation.Parameters is null) return;
-            
+
             foreach (var parameter in operation.Parameters)
             {
                 var description = apiDescription.ParameterDescriptions.First(p => p.Name == parameter.Name);
