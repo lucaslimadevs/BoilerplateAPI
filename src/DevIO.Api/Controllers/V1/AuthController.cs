@@ -2,6 +2,7 @@
 using DevIO.Api.ViewModels;
 using DevIO.Business.Intefaces;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System.Threading.Tasks;
 
 namespace DevIO.Api.Controllers.V1
@@ -12,12 +13,14 @@ namespace DevIO.Api.Controllers.V1
     public class AuthController : MainController
     {
         public readonly IidentityManager _identityManager;
+        private readonly ILogger _logger;
         public AuthController(INotificador notificador,
                               IUser user,
-                              IidentityManager identityManager
-                              ) : base(notificador, user)
+                              IidentityManager identityManager,
+                              ILogger<AuthController> logger) : base(notificador, user)
         {
             _identityManager = identityManager;
+            _logger = logger;
         }
 
         [HttpPost("registrar-usuario")]
@@ -49,6 +52,7 @@ namespace DevIO.Api.Controllers.V1
 
             if (logged)
             {
+                _logger.LogInformation($"Usuario {UserLogin.Email} logado com sucesso");
                 return CustomResponse(await _identityManager.GenerateJwt(UserLogin.Email));
             }
 

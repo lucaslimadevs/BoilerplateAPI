@@ -1,5 +1,6 @@
 using AutoMapper;
 using DevIO.Api.Configuration;
+using DevIO.Api.Extensions;
 using DevIO.Data.Context;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -44,6 +45,8 @@ namespace DevIO.Api
             );
 
             services.AddSwaggerConfig();
+
+            services.AddLoggingConfiguration();
 
             services.AddApiVersioning(options => 
             {
@@ -112,7 +115,11 @@ namespace DevIO.Api
             
             app.UseAuthorization();
 
+            app.UseMiddleware<ExceptionMiddleware>();
+
             app.UseSwaggerConfig(provider);
+
+            app.UseLoggingConfiguration();
 
             app.UseEndpoints(endpoints =>
             {
