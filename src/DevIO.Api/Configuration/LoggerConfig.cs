@@ -8,7 +8,7 @@ namespace DevIO.Api.Configuration
 {
     public static class LoggerConfig
     {
-        public static IServiceCollection AddLoggingConfiguration(this IServiceCollection services)
+        public static IServiceCollection AddLoggingConfig(this IServiceCollection services)
         {
             services.AddElmahIo(o =>
             {

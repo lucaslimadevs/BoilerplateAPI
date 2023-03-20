@@ -46,44 +46,16 @@ namespace DevIO.Api
 
             services.AddSwaggerConfig();
 
-            services.AddLoggingConfiguration();
+            services.AddLoggingConfig();
 
-            services.AddApiVersioning(options => 
-            {
-                options.AssumeDefaultVersionWhenUnspecified = true;
-                options.DefaultApiVersion = new ApiVersion(1, 0);
-                options.ReportApiVersions = true;
-            });
-
-            services.AddVersionedApiExplorer(options =>
-            {
-                options.GroupNameFormat = "'v'VVV";
-                options.SubstituteApiVersionInUrl = true;
-            });
+            services.AddVersioningConfig();
 
             services.Configure<ApiBehaviorOptions>(options => 
             {
                 options.SuppressModelStateInvalidFilter = true;
             });
 
-            services.AddCors(options => {
-                options.AddPolicy("Development",
-                    builder => builder
-                    .AllowAnyMethod()
-                    .AllowAnyHeader()
-
-                    .AllowCredentials()
-                    .SetIsOriginAllowed(hostName => true));
-
-
-                options.AddPolicy("Production",
-                    builder => builder
-                    .AllowAnyMethod()
-                    .AllowAnyHeader()
-                    .WithOrigins("http://localhost:4200")
-                    .AllowCredentials()
-                    .SetIsOriginAllowed(hostName => true));
-            });
+            services.AddCorsConfig();
 
             services.ResolveDependecies();
         }
