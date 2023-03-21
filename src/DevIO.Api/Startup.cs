@@ -2,7 +2,9 @@ using AutoMapper;
 using DevIO.Api.Configuration;
 using DevIO.Api.Extensions;
 using DevIO.Data.Context;
+using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
@@ -30,9 +32,11 @@ namespace DevIO.Api
                    .AddJsonFile("appsettings.json")
                    .Build();
 
+            var connString = Configuration.GetConnectionString("DefaultConnection");
+
             services.AddDbContext<MeuDbContext>(options => 
             {
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+                options.UseSqlServer(connString);
             });
 
             services.AddIdentityConfiguration(Configuration);
@@ -56,6 +60,11 @@ namespace DevIO.Api
             });
 
             services.AddCorsConfig();
+
+            services.AddHealthChecks()
+                .AddSqlServer(connString, null,"Database");
+
+            services.AddHealthChecksUI();
 
             services.ResolveDependecies();
         }
@@ -92,6 +101,17 @@ namespace DevIO.Api
             app.UseSwaggerConfig(provider);
 
             app.UseLoggingConfiguration();
+
+            app.UseHealthChecks("/api/hc",  new HealthCheckOptions() 
+            { 
+                Predicate = _ => true,
+                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
+            });
+            
+            app.UseHealthChecksUI(options => 
+            {
+                options.UIPath = "/api/hc-ui";
+            });
 
             app.UseEndpoints(endpoints =>
             {
