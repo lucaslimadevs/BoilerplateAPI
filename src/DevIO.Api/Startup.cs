@@ -50,7 +50,7 @@ namespace DevIO.Api
 
             services.AddSwaggerConfig();
 
-            services.AddLoggingConfig();
+            services.AddLoggingConfig(Configuration);
 
             services.AddVersioningConfig();
 
@@ -60,11 +60,6 @@ namespace DevIO.Api
             });
 
             services.AddCorsConfig();
-
-            services.AddHealthChecks()
-                .AddSqlServer(connString, null,"Database");
-
-            services.AddHealthChecksUI();
 
             services.ResolveDependecies();
         }
@@ -100,18 +95,7 @@ namespace DevIO.Api
 
             app.UseSwaggerConfig(provider);
 
-            app.UseLoggingConfiguration();
-
-            app.UseHealthChecks("/api/hc",  new HealthCheckOptions() 
-            { 
-                Predicate = _ => true,
-                ResponseWriter = UIResponseWriter.WriteHealthCheckUIResponse
-            });
-            
-            app.UseHealthChecksUI(options => 
-            {
-                options.UIPath = "/api/hc-ui";
-            });
+            app.UseLoggingConfiguration();            
 
             app.UseEndpoints(endpoints =>
             {
